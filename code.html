@@ -1,189 +1,379 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
-	<head>
-		<title>App Name: A Coding Project By David Blackwelder</title>
-		<!-- Required meta tags -->
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
 
-		<!-- Bootstrap CSS -->
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-			crossorigin="anonymous"
-		/>
-		<script
-			src="https://kit.fontawesome.com/5db21ba9c6.js"
-			crossorigin="anonymous"
-		></script>
-		<link rel="stylesheet" href="css/site.css" />
-		<link rel="stylesheet" href="css/prism.css" />
-		<link rel="icon" type="image/png" href="img/favicon-32x32.png" />
-	</head>
+<head>
+  <title>DVD Rentals: A SQL Project By David Blackwelder</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-	<body class="d-flex flex-column h-100">
-		<!-- ==== Nav Section ==== -->
-		<nav class="navbar navbar-expand-md navbar-dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="/"
-					><img
-						src="img/Color logo - no background.png"
-						class="d-inline-block align-text-center px-5"
-						height="70"
-					/>
-					APP NAME</a
-				>
-				<button
-					class="navbar-toggler"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#navbarCollapse"
-					aria-controls="navbarCollapse"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarCollapse">
-					<ul class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<a class="nav-link" href="/">Home</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="app.html">The App</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="code.html"
-								>The Code</a
-							>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" target="_blank" href="https://github.com/"
-								>Git Repo</a
-							>
-						</li>
-						<li class="nav-item">
-							<a
-								class="nav-link"
-								target="_blank"
-								href="https://www.davidblackwelder.dev"
-								>About</a
-							>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/prism.css" />
+  <link rel="icon" type="image/png" href="img/favicon-32x32.png" />
+</head>
 
-		<!-- ==== Main Section ==== -->
-		<main class="flex-shrink-0">
-			<div class="container py-4 px-5">
-				<h1 class="border-1 border-bottom border-dark">
-					The Code for APP NAME
-				</h1>
-				<div class="row row-cols-1 row-cols-lg-2">
-					<div class="col-lg-8">
-						<pre class="line-numbers">
-              <code class="language-javascript">
-                // Call Hello World
-                function helloWorld() {
-                  alert("hello world");
-                }
+<body class="d-flex flex-column h-100">
+  <!-- ==== Nav Section ==== -->
+  <nav class="navbar navbar-expand-md navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><img src="img/Color logo - no background.png"
+          class="d-inline-block align-text-center px-5" height="70" />
+        DVD Rentals</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://github.com/davidblackwelder/dvdrental">Git Repo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://www.davidblackwelder.com">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==== Main Section ==== -->
+  <main class="flex-shrink-0">
+    <div class="container py-4 px-5">
+      <h1 class="border-1 border-bottom border-dark">
+        The Code for DVD Rentals
+      </h1>
+      <div class="row row-cols-1 row-cols-lg-1">
+        <div class="col-lg-12">
+          <pre class="line-numbers">
+              <code class="language-plsql">
+                -- Perform transformation on status column from integer to a user-friendly string.
+                CREATE OR REPLACE FUNCTION status(active INTEGER)
+                  RETURNS CHAR(8)
+                  LANGUAGE plpgsql
+                AS
+                $$
+                DECLARE customer_status VARCHAR(8);
+                BEGIN
+                  SELECT CASE
+                          WHEN active = 1 THEN 'Active'
+                          WHEN active = 0 THEN 'Inactive'
+                        END INTO customer_status;
+                  RETURN customer_status;
+                END;
+                $$
+
+                -- Drop detailed table if already exists, then creates a new detailed table with zero rows
+                DROP TABLE IF EXISTS detailed;
+                CREATE TABLE detailed (
+                  store_id SMALLINT,
+                  status VARCHAR(8),
+                  first_name VARCHAR(45),
+                  last_name VARCHAR(45),
+                  email VARCHAR(50),
+                  phone VARCHAR(20),
+                  num_of_times_rented BIGINT,
+                  title VARCHAR(255),
+                  genre VARCHAR(25),
+                  description TEXT,
+                  rental_rate NUMERIC(4,2),
+                  address VARCHAR(50),
+                  address2 VARCHAR(50),
+                  district VARCHAR(20),
+                  city VARCHAR(50),
+                  country VARCHAR(50),
+                  postal_code VARCHAR(10)
+                );
+
+                -- Uncomment line below to check detailed table columns, data types, and no rows
+                -- SELECT * FROM detailed;
+
+                -- Drop summary table if already exists, then create a new summary table with zero rows
+                DROP TABLE IF EXISTS summary;
+                CREATE TABLE summary (
+                  store_id SMALLINT,
+                  first_name VARCHAR(45),
+                  last_name VARCHAR(45),
+                  status VARCHAR(8),
+                  total_rentals BIGINT
+                );
+
+                -- Uncomment line below to check summary table columns, data types, and no rows
+                -- SELECT * FROM summary;
+
+                -- Select the following columns from the joining of the following tables
+                -- insert the resulting rows into the detailed table grouped by and ordered by
+                INSERT INTO detailed
+                SELECT c.store_id,
+                      status(c.active) AS status,
+                      c.first_name,
+                      c.last_name,
+                      c.email,
+                      a.phone,
+                      COUNT(r.rental_id) AS num_of_times_rented,
+                      f.title,
+                      cat.name AS genre,
+                      f.description,
+                      f.rental_rate,
+                      a.address,
+                      a.address2,
+                      a.district,
+                      city.city,
+                      country.country,
+                      a.postal_code
+                FROM customer c
+                JOIN address a
+                ON c.address_id = a.address_id
+                JOIN city
+                ON city.city_id = a.city_id
+                JOIN country
+                ON country.country_id = city.country_id
+                JOIN rental r
+                ON c.customer_id = r.customer_id
+                JOIN inventory i
+                ON i.inventory_id = r.inventory_id
+                JOIN film f
+                ON f.film_id = i.film_id
+                JOIN film_category fc
+                ON fc.film_id = f.film_id
+                JOIN category cat
+                ON cat.category_id = fc.category_id
+                GROUP BY status,
+                        c.first_name,
+                        c.last_name,
+                        c.email,
+                        a.address,
+                        a.address2,
+                        a.district,
+                        city.city,
+                        country.country,
+                        a.postal_code,
+                        a.phone,
+                        f.title,
+                        genre,
+                        f.description,
+                        f.rental_rate,
+                        c.store_id
+                ORDER BY c.first_name, genre;
+
+                -- Uncomment line below to ensure rows are inserted into detailed table
+                -- SELECT * FROM detailed;
+
+                -- Select the following columns from the detailed table
+                -- and insert the resulting rows into the summary table grouped by and ordered by
+                INSERT INTO summary
+                SELECT store_id, first_name, last_name, status, SUM(num_of_times_rented) AS total_rentals
+                FROM detailed
+                GROUP BY first_name, last_name, status, store_id
+                ORDER BY total_rentals DESC, first_name;
+
+                -- Uncomment line below to ensure rows are inserted into summary table
+                -- SELECT * FROM summary;
+
+                -- Creates a trigger on the detailed table of the report that will
+                -- continually update the summary table as data is added to the detailed table.
+
+                -- step 1: Trigger function
+                CREATE OR REPLACE FUNCTION insert_new_rental_into_summary_from_detailed()
+                  RETURNS TRIGGER
+                  LANGUAGE plpgsql
+                AS $$
+                BEGIN
+                  DELETE FROM summary; -- delete all data from table
+                  INSERT INTO summary
+                  SELECT store_id, first_name, last_name, status, SUM(num_of_times_rented) AS total_rentals
+                  FROM detailed
+                  GROUP BY first_name, last_name, status, store_id
+                  ORDER BY total_rentals DESC, first_name;
+                  RETURN NEW;
+                END;
+                $$;
+
+                -- step 2: Create trigger statement
+                CREATE TRIGGER new_rental_for_summary
+                  AFTER INSERT
+                  ON detailed
+                  FOR EACH STATEMENT
+                    EXECUTE PROCEDURE insert_new_rental_into_summary_from_detailed();
+
+                -- Uncomment lines below to get current totals for each table to compare after
+                -- inserting new row to test trigger function and statement work
+                -- SELECT SUM(num_of_times_rented) FROM detailed;
+                -- SELECT SUM(total_rentals) FROM summary; -- output should match output from statement above
+
+                -- Uncomment to insert test customer to ensure trigger works
+                /*
+                INSERT INTO detailed (store_id,
+                                      status,
+                                      first_name,
+                                      last_name,
+                                      email,
+                                      num_of_times_rented,
+                                      title,
+                                      genre) VALUES (1,
+                                                     'Active',
+                                                     'Test',
+                                                     'Customer',
+                                                     'test@email.com',
+                                                     1000,
+                                                     'Test Film Title',
+                                                     'Action');
+                */
+
+                -- Uncomment code below to get totals after inserting a row to make sure trigger function and statement are working
+                -- SELECT SUM(num_of_times_rented) FROM detailed;
+                -- SELECT SUM(total_rentals) FROM summary; -- output should match output from statement above
+                -- SELECT * FROM summary; -- this should show Test Customer as first record with 1,000 total rentals
+
+                -- Creates a stored procedure that can be used to refresh the data in both the detailed table and summary table.
+                -- This will clear the detailed table, perform the data extraction and insert data in the detailed table.
+                -- This will then invoke the trigger function to update the summary table.
+
+                CREATE OR REPLACE PROCEDURE refresh_detailed_and_summary()
+                LANGUAGE plpgsql
+                AS $$
+                BEGIN
+                  -- Clears table content
+                  DELETE FROM detailed;
+
+                  -- Select the following columns from the joining of the following tables and
+                  -- insert the resulting rows into the detailed table grouped by and ordered by
+                  INSERT INTO detailed
+                  SELECT c.store_id,
+                        status(c.active) AS status,
+                        c.first_name,
+                        c.last_name,
+                        c.email,
+                        a.phone,
+                        COUNT(r.rental_id) AS num_of_times_rented,
+                        f.title,
+                        cat.name AS genre,
+                        f.description,
+                        f.rental_rate,
+                        a.address,
+                        a.address2,
+                        a.district,
+                        city.city,
+                        country.country,
+                        a.postal_code
+                  FROM customer c
+                  JOIN address a
+                  ON c.address_id = a.address_id
+                  JOIN city
+                  ON city.city_id = a.city_id
+                  JOIN country
+                  ON country.country_id = city.country_id
+                  JOIN rental r
+                  ON c.customer_id = r.customer_id
+                  JOIN inventory i
+                  ON i.inventory_id = r.inventory_id
+                  JOIN film f
+                  ON f.film_id = i.film_id
+                  JOIN film_category fc
+                  ON fc.film_id = f.film_id
+                  JOIN category cat
+                  ON cat.category_id = fc.category_id
+                  GROUP BY status,
+                          c.first_name,
+                          c.last_name,
+                          c.email,
+                          a.address,
+                          a.address2,
+                          a.district,
+                          city.city,
+                          country.country,
+                          a.postal_code,
+                          a.phone,
+                          f.title,
+                          genre,
+                          f.description,
+                          f.rental_rate,
+                          c.store_id
+                  ORDER BY c.first_name, genre;
+                END;
+                $$;
+
+                -- A job scheduling tool that could be used to automate the stored procedure is pgAgent
+                -- For testing purposes call this manually
+                CALL refresh_detailed_and_summary();
+
+                -- Uncomment code below to get current totals for each table to test the stored procedure works at refereshing data
+                -- SELECT SUM(num_of_times_rented) FROM detailed;
+                -- SELECT SUM(total_rentals) FROM summary; -- output should match output from statement above
+                -- SELECT * FROM summary; -- this should no longer show Test Customer as first record with 1,000 total rentals
+                -- SELECT * FROM detailed WHERE first_name = 'Test'; -- this should not return any results
+                -- SELECT * FROM summary WHERE first_name = 'Test';
               </code>
             </pre>
-					</div>
-					<div class="col-lg-4">
-						<p>The code is structured in one function.</p>
-						<h5>Hello World</h5>
-						<p>
-							Hello World is a function that displays an alert with the message
-							of "Hello World"
-						</p>
-					</div>
-				</div>
-			</div>
-		</main>
+        </div>
+      </div>
+    </div>
+  </main>
 
-		<!-- ==== Footer Section ==== -->
-		<footer class="footer mt-auto">
-			<div class="container-fluid">
-				<div class="row row-cols-1 row-cols-lg-3 gy-5">
-					<div
-						class="
+  <!-- ==== Footer Section ==== -->
+  <footer class="footer mt-auto">
+    <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-lg-3 gy-5">
+        <div class="
 							col
 							text-light
 							d-flex
 							align-items-center
 							justify-content-center justify-content-lg-start
 							order-last order-lg-first
-						"
-					>
-						<div>
-							<span class="text-muted">&copy;2021</span> David Blackwelder
-						</div>
-					</div>
-					<div class="col d-flex align-items-center justify-content-center">
-						<img
-							src="img/White logo - no background.svg"
-							alt="David Blackwelder Logo"
-							height="90"
-						/>
-					</div>
-					<div
-						class="
+						">
+          <div>
+            <span class="text-muted">&copy;2024</span> David Blackwelder
+          </div>
+        </div>
+        <div class="col d-flex align-items-center justify-content-center">
+          <img src="img/White logo - no background.svg" alt="David Blackwelder Logo" height="90" />
+        </div>
+        <div class="
 							col
 							d-flex
 							align-items-center
 							justify-content-center justify-content-lg-end
-						"
-					>
-						<div class="row">
-							<div class="col social">
-								<a
-									href="https://www.linkedin.com/in/davidblackwelder/"
-									target="_blank"
-									><i class="fab fa-linkedin fa-2x"></i
-								></a>
-							</div>
-							<div class="col social">
-								<a href="https://github.com/davidblackwelder" target="_blank"
-									><i class="fab fa-github fa-2x"></i
-								></a>
-							</div>
-							<div class="col social">
-								<a href="https://twitter.com/chessnerdbird" target="_blank"
-									><i class="fab fa-twitter fa-2x"></i
-								></a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+						">
+          <div class="row">
+            <div class="col social">
+              <a href="https://www.linkedin.com/in/davidblackwelder/" target="_blank"><i
+                  class="fab fa-linkedin fa-2x"></i></a>
+            </div>
+            <div class="col social">
+              <a href="https://github.com/davidblackwelder" target="_blank"><i class="fab fa-github fa-2x"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-		<!-- Bootstrap JS -->
-		<script
-			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-			integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-			integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-			crossorigin="anonymous"
-		></script>
-		<script src="js/prism.js"></script>
-		<script>
-			Prism.plugins.NormalizeWhitespace.setDefaults({
-				"remove-trailing": true,
-				"remove-indent": true,
-				"left-trim": true,
-				"right-trim": true,
-			});
-		</script>
-	</body>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+  </script>
+  <script src="js/prism.js"></script>
+  <script>
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+      "remove-trailing": true,
+      "remove-indent": true,
+      "left-trim": true,
+      "right-trim": true,
+    });
+  </script>
+</body>
+
 </html>
